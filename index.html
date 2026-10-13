@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- EDIT: put your real name here -->
+  <title>Takunda Mapiro— Engineering Portfolio</title>
+  <meta name="description" content="Electronics, robotics and software projects by Your Name, a student engineer in Chester, UK.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --surface: #ffffff;
+      --text: #15181c;
+      --muted: #5b636e;
+      --line: #dfe3dc;
+      --accent: #e8590c;
+      --accent-soft: #fff0e6;
+      --grid: rgba(21, 24, 28, 0.045);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f1215;
+        --surface: #171b20;
+        --text: #e9ecef;
+        --muted: #9aa3ad;
+        --line: #2a3038;
+        --accent: #ff7a2f;
+        --accent-soft: #2a1a10;
+        --grid: rgba(255, 255, 255, 0.04);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0f1215;
+      --surface: #171b20;
+      --text: #e9ecef;
+      --muted: #9aa3ad;
+      --line: #2a3038;
+      --accent: #ff7a2f;
+      --accent-soft: #2a1a10;
+      --grid: rgba(255, 255, 255, 0.04);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    /* Nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { font-weight: 700; text-decoration: none; }
+    .logo span { color: var(--accent); }
+    nav ul { display: flex; gap: 20px; list-style: none; font-size: 0.9rem; }
+    nav ul a { text-decoration: none; color: var(--muted); }
+    nav ul a:hover { color: var(--text); }
+
+    /* Hero */
+    header { padding: 88px 0 64px; }
+    .tag { font-size: 0.8rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.2rem, 7vw, 3.8rem); line-height: 1.05; margin: 14px 0 20px; letter-spacing: -0.02em; }
+    .lead { font-size: 1.15rem; color: var(--muted); max-width: 620px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn {
+      display: inline-block; padding: 11px 20px; border-radius: 6px;
+      text-decoration: none; font-weight: 500; font-size: 0.95rem;
+      border: 1px solid var(--line); background: var(--surface);
+    }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn:hover { transform: translateY(-1px); }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    h2 { font-size: 1.6rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .section-sub { color: var(--muted); margin-bottom: 32px; }
+
+    /* Project cards */
+    .featured { display: grid; gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 10px; overflow: hidden;
+      display: grid; grid-template-columns: 1fr;
+    }
+    @media (min-width: 720px) {
+      .card { grid-template-columns: 300px 1fr; }
+    }
+    .card figure {
+      min-height: 180px;
+      background:
+        repeating-linear-gradient(45deg, var(--accent-soft) 0 10px, transparent 10px 20px),
+        var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.8rem; border-bottom: 1px solid var(--line);
+    }
+    @media (min-width: 720px) {
+      .card figure { border-bottom: none; border-right: 1px solid var(--line); }
+    }
+    .card figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 22px; }
+    .card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .card h3 { font-size: 1.25rem; }
+    .status {
+      font-size: 0.7rem; padding: 3px 8px; border-radius: 99px;
+      border: 1px solid var(--line); color: var(--muted);
+    }
+    .status.live { color: var(--accent); border-color: var(--accent); }
+    .card p { color: var(--muted); margin-bottom: 14px; }
+    .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .stack li {
+      list-style: none; font-size: 0.72rem; padding: 3px 8px;
+      background: var(--accent-soft); border-radius: 4px;
+    }
+    .links { display: flex; gap: 16px; font-size: 0.9rem; }
+    .links a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    .links a:hover { text-decoration: underline; }
+
+    .more { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .mini {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 10px; padding: 18px;
+    }
+    .mini h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .mini p { color: var(--muted); font-size: 0.92rem; }
+
+    /* Skills */
+    .skills { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .skills div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+    .skills h3 { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .skills p { font-size: 0.92rem; color: var(--muted); }
+
+    /* Contact & footer */
+    .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    footer { padding: 32px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+    @media (max-width: 560px) {
+      nav ul { gap: 14px; font-size: 0.82rem; }
+      header { padding: 56px 0 44px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <!-- EDIT: your initials or name -->
+      <a href="#" class="logo mono">YN<span>_</span></a>
+      <ul>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap">
+      <p class="tag mono">Student engineer · Chester, UK</p>
+      <!-- EDIT: your name -->
+      <h1>Hi, I'm Your Name.<br>I build robots, drones and the systems that run them.</h1>
+      <p class="lead">
+        I'm a student working across electronics, robotics and software. Here are my projects:
+        what I built, what broke, and what I learned fixing it.
+      </p>
+      <div class="cta">
+        <a href="#projects" class="btn primary">See projects</a>
+        <!-- EDIT: your GitHub username -->
+        <a href="https://github.com/yourusername" class="btn">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="projects">
+    <div class="wrap">
+      <h2>Featured projects</h2>
+      <p class="section-sub">The builds I've taken furthest.</p>
+
+      <div class="featured">
+
+        <!-- PROJECT 1 -->
+        <article class="card">
+          <!-- To add a photo: replace the text inside <figure> with
+               <img src="images/robot-arm.jpg" alt="Robot arm mounted on a backpack"> -->
+          <figure class="mono">[ photo: robot arm ]</figure>
+          <div class="card-body">
+            <div class="card-head">
+              <h3>Wearable Robotic Arm</h3>
+              <span class="status mono">In progress</span>
+            </div>
+            <p>
+              A backpack-mounted robotic arm driven by 25 kg servos. It's controlled with potentiometers,
+              with voice control in development and a Python GUI planned.
+              <!-- EDIT: add one result, e.g. reach, payload or response time -->
+            </p>
+            <ul class="stack mono">
+              <li>25kg servos</li><li>Arduino</li><li>Python</li><li>Voice control</li>
+            </ul>
+            <div class="links">
+              <a href="#">Write-up →</a>
+              <a href="#">Code →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 2 -->
+        <article class="card">
+          <figure class="mono">[ photo: quadcopter ]</figure>
+          <div class="card-body">
+            <div class="card-head">
+              <h3>GPS Quadcopter</h3>
+              <span class="status mono">In progress</span>
+            </div>
+            <p>
+              My first scratch-built quadcopter. It has a carbon-rod frame and a Pixhawk flight controller
+              running ArduPilot, with M8N GPS for position hold and autonomous missions.
+            </p>
+            <ul class="stack mono">
+              <li>ArduPilot</li><li>Pixhawk 2.4.8</li><li>M8N GPS</li><li>2212 920KV</li><li>30A ESCs</li>
+            </ul>
+            <div class="links">
+              <a href="#">Write-up →</a>
+              <a href="#">Flight video →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3 -->
+        <article class="card">
+          <figure class="mono">[ photo: fibre link ]</figure>
+          <div class="card-body">
+            <div class="card-head">
+              <h3>Fibre-Optic Arduino Link</h3>
+              <span class="status mono">Planned</span>
+            </div>
+            <p>
+              A custom communication protocol I'm designing from scratch, sending data between
+              Arduinos over optical fibre. It covers framing, error detection and throughput testing.
+            </p>
+            <ul class="stack mono">
+              <li>Arduino</li><li>Optical fibre</li><li>Protocol design</li><li>C++</li>
+            </ul>
+            <div class="links">
+              <a href="#">Write-up →</a>
+              <a href="#">Code →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>More builds</h2>
+      <p class="section-sub">Smaller projects and ongoing experiments.</p>
+      <div class="more">
+        <div class="mini">
+          <h3>Homelab Cluster</h3>
+          <p>A Proxmox cluster with VLAN-segmented networking on a Meraki firewall and Tailscale-only remote access. It runs my self-hosted services.</p>
+        </div>
+        <div class="mini">
+          <h3>Mecanum Robot Car</h3>
+          <p>An omnidirectional four-wheel car with an ESP32-S3 controller and MOSFET motor drivers. Xbox controller input is next.</p>
+        </div>
+        <div class="mini">
+          <h3>Gas Detection Board</h3>
+          <p>An ESP32-based air quality and gas sensor board for home safety. It's the foundation for a gas-source localisation robot.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="section-sub">What I work with.</p>
+      <div class="skills">
+        <div>
+          <h3 class="mono">Electronics</h3>
+          <p>Microcontrollers (Arduino, ESP32), motor control, sensors, power systems, soldering</p>
+        </div>
+        <div>
+          <h3 class="mono">Robotics &amp; UAVs</h3>
+          <p>Servo mechanisms, ArduPilot, flight controllers, mecanum drive</p>
+        </div>
+        <div>
+          <h3 class="mono">Software</h3>
+          <p>C++, Python, Node.js, Linux, Docker</p>
+        </div>
+        <div>
+          <h3 class="mono">Infrastructure</h3>
+          <p>Proxmox, VLANs, firewalls, self-hosting</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Get in touch</h2>
+      <p class="section-sub">Open to work experience, competitions and collaboration.</p>
+      <div class="contact-links">
+        <!-- EDIT: your details -->
+        <a href="mailto:you@example.com" class="btn primary">Email me</a>
+        <a href="https://github.com/yourusername" class="btn">GitHub</a>
+        <a href="https://www.linkedin.com/in/yourprofile" class="btn">LinkedIn</a>
+        <a href="https://www.youtube.com/@yourchannel" class="btn">YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap mono">
+      © <span id="year"></span> Your Name · Built by hand, hosted on GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
